@@ -194,7 +194,7 @@ export const userController = {
       const response = await got
         .post("https://api.flutterwave.com/v3/payments", {
           headers: {
-            Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
+            Authorization: `Bearer FLWSECK-e2581a50a3c72e614dd2c3fdd829ee08-X`,
           },
           json: {
             tx_ref: (Math.random() + 1).toString(36).substring(7),

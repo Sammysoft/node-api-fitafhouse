@@ -20,13 +20,12 @@ import "./config/passport.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8099;
-const ATLAS = process.env.MongoDB_ATLAS;
 app.use(
   session({
     secret: "fitaf secret",
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: ATLAS, collectionName: "sessions" }),
+    store: MongoStore.create({ mongoUrl:"mongodb+srv://FITAFHouse:FITAFHouse@investment.5o7ix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", collectionName: "sessions" }),
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
     },
