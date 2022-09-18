@@ -19,7 +19,7 @@ import './config/passport.js';
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8089;
-const ATLAS =  process.env.MongoDB
+const ATLAS =  "mongodb+srv://FITAFHouse:z7IVKotQfLySsVEl@investment.5o7ix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 app.use(session({
     secret: 'fitaf secret',
     resave: false,
