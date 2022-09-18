@@ -1,57 +1,63 @@
-import express from 'express';
-import passport from 'passport';
-import   _connectDB    from './config/db.js';
-import session from 'express-session';
-import userRouter from './routes/user.route.js';
-import adminRouter from './routes/admin-route.js';
-import MongoStore from 'connect-mongo';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import dotenv from 'dotenv';
+import express from "express";
+import passport from "passport";
+import _connectDB from "./config/db.js";
+import session from "express-session";
+import userRouter from "./routes/user.route.js";
+import adminRouter from "./routes/admin-route.js";
+import MongoStore from "connect-mongo";
+import bodyParser from "body-parser";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import dotenv from "dotenv";
+import { sendMail } from "./config/mail-service.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-import './config/passport.js';
+import "./config/passport.js";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 8089;
-app.use(session({
-    secret: 'fitaf secret',
+const port = process.env.PORT || 8099;
+const ATLAS = process.env.MongoDB_ATLAS;
+app.use(
+  session({
+    secret: "fitaf secret",
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({mongoUrl:"mongodb+srv://FITAFHouse:FITAFHouse@investment.5o7ix.mongodb.net/?retryWrites=true&w=majority", collectionName: "sessions" } ),
+    store: MongoStore.create({ mongoUrl: ATLAS, collectionName: "sessions" }),
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24
-    }
-}))
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
 app.use(passport.initialize());
-app.use(passport.session())
-
+app.use(passport.session());
 
 app.use(function (req, res, next) {
-    //Enabling CORS
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type");
-      next();
-    });
+  //Enabling CORS
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type"
+  );
+  next();
+});
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.listen(port, ()=>{
-    console.log(`Server running on http://localhost:${port}`)
-    _connectDB();
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+  _connectDB();
 });
-app.get('/', (req,res,next)=>{
-    res.status(200).sendFile(path.join(__dirname, '/index.html'));
-
-})
-app.use('/api', userRouter);
-app.use('/api', adminRouter);
-
+app.get("/", (req, res, next) => {
+  res.status(200).sendFile(path.join(__dirname, "/index.html"));
+});
+app.use("/api", userRouter);
+app.use("/api", adminRouter);

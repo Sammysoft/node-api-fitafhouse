@@ -4,7 +4,7 @@ const adminRouter = express.Router();
 import {adminController} from '../controllers/admin-controller.js'
 
 
-adminRouter.post('/delete/:id',adminController._deleteInvestor, );
+adminRouter.post('/delete/:id',adminController._deleteInvestment, );
 adminRouter.get('/users', adminController._getUsers)
 adminRouter.get('/stats', adminController._getStats)
 adminRouter.get('/active-investors', adminController._getActiveInvestors)

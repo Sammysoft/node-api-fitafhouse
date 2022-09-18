@@ -21,12 +21,15 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "flutterwave-node-v3": "^1.0.9",
+    "got": "^12.0.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.5",
+    "nodemailer": "^6.7.5",
+    "nodemailer-mailgun-transport": "^2.1.4",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
-    "paystack-api": "^2.0.6"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
