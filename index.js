@@ -23,7 +23,7 @@ app.use(session({
     secret: 'fitaf secret',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({mongoUrl:process.env.MongoDB_ATLAS, collectionName: "sessions" } ),
+    store: MongoStore.create({mongoUrl:"mongodb+srv://FITAFHouse:FITAFHouse@investment.5o7ix.mongodb.net/?retryWrites=true&w=majority", collectionName: "sessions" } ),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24
     }
